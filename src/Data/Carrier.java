@@ -12,10 +12,12 @@ public class Carrier implements Units {
     private int movementSpeed = 1;
     private int capacity = 6;
     private Player owner;
+    private Coordinates placement;
 
-    public Carrier(Player owner)
+    public Carrier(Player owner, Coordinates placement)
     {
         this.owner = owner;
+        this.placement = placement;
     }
 
     @Override
@@ -51,7 +53,17 @@ public class Carrier implements Units {
     {
         return owner;
     }
-
+	
+	public Coordinates getPlacement()
+	{
+		return placement;
+	}
+	
+	public void setPlacement(Coordinates placement)
+    {
+        this.placement = placement;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

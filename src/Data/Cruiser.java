@@ -12,10 +12,12 @@ public class Cruiser implements Units {
     private int movementSpeed = 2;
     private int capacity = 0;
     private Player owner;
+    private Coordinates placement;
 
-    public Cruiser(Player owner)
+    public Cruiser(Player owner, Coordinates placement)
     {
         this.owner = owner;
+        this.placement = placement;
     }
 
     @Override
@@ -52,7 +54,17 @@ public class Cruiser implements Units {
     {
         return owner;
     }
-
+    
+    public Coordinates getPlacement()
+    {
+        return placement;
+    }
+    
+    public void setPlacement(Coordinates placement)
+    {
+        this.placement = placement;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

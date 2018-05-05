@@ -12,10 +12,12 @@ public class Dreadnought implements Units {
     private int movementSpeed = 1;
     private int capacity = 0;
     private Player owner;
+    private Coordinates placement;
 
-    public Dreadnought(Player owner)
+    public Dreadnought(Player owner, Coordinates placement)
     {
         this.owner = owner;
+        this.placement = placement;
     }
 
     @Override
