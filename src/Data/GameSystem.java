@@ -9,23 +9,53 @@ public class GameSystem {
 
     Coordinates location;
     Set<Planet> planetSet = new HashSet<>();
-    List<Units> unitsSet = new ArrayList<>();
+    List<Carrier>carriers = new LinkedList<>();
+    List<Cruiser>cruisers = new LinkedList<>();
+    List<Destroyer>destroyers = new LinkedList<>();
+    List<Dreadnought>dreadnoughts = new LinkedList<>();
 
-    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Units> unitsSet) {
+    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Carrier> carriers, List<Cruiser> cruisers, List<Destroyer> destroyers, List<Dreadnought> dreadnoughts) {
         this.location = location;
         this.planetSet = planetSet;
-        this.unitsSet = unitsSet;
+        this.carriers = carriers;
+        this.cruisers = cruisers;
+        this.destroyers = destroyers;
+        this.dreadnoughts = dreadnoughts;
     }
+<<<<<<< Updated upstream
     
     
     
+=======
+
+>>>>>>> Stashed changes
     /*
      * Takes the amount of ships in the system and counts how many ships there are in total
      */
     public int findShips(){
         int amountOfShips = 0;
+<<<<<<< Updated upstream
         if () {
             for (Units unit : unitsSet) {
+=======
+        if (carriers != null) {
+            for (Carrier carrier : carriers) {
+                amountOfShips++;
+            }
+        }
+        if (cruisers != null) {
+            for (Cruiser cruiser : cruisers) {
+                amountOfShips++;
+            }
+        }
+        if (destroyers != null) {
+            for (Destroyer destroyer : destroyers) {
+                amountOfShips++;
+            }
+        }
+        if (dreadnoughts != null) {
+            for (Dreadnought dreadnought : dreadnoughts) {
+>>>>>>> Stashed changes
                 amountOfShips++;
             }
         }
@@ -50,13 +80,15 @@ public class GameSystem {
         if (o == null || getClass() != o.getClass()) return false;
         GameSystem that = (GameSystem) o;
         return location == that.location &&
-                Objects.equals(planetSet, that.planetSet) &&
-                Objects.equals(unitsSet, that.unitsSet);
+                Objects.equals(carriers, that.carriers) &&
+                Objects.equals(cruisers, that.cruisers) &&
+                Objects.equals(destroyers, that.destroyers) &&
+                Objects.equals(dreadnoughts, that.dreadnoughts);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(location, planetSet, unitsSet);
+        return Objects.hash(location);
     }
 }
