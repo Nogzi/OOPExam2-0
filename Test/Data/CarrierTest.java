@@ -6,6 +6,7 @@ package Data;/*
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CarrierTest
@@ -23,6 +24,8 @@ public class CarrierTest
         assertEquals(6, carrier1.getCapacity());
         assertEquals(player, carrier1.getOwner());
 
-        assertTrue(carrier1 != carrier2);
+        assertTrue(carrier1.equals(carrier1));
+        assertTrue(carrier1.equals(carrier2));
+        assertFalse(carrier1.equals(null));
     }
 }
