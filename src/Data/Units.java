@@ -7,4 +7,5 @@ public interface Units {
     int getMovementSpeed();
     int getCapacity();
     Player getOwner();
+    Coordinates getPlacement();
 }

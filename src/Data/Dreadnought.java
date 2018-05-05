@@ -54,7 +54,18 @@ public class Dreadnought implements Units {
     {
         return owner;
     }
-
+    
+    @Override
+    public Coordinates getPlacement()
+    {
+        return placement;
+    }
+    
+    public void setPlacement(Coordinates placement)
+    {
+        this.placement = placement;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

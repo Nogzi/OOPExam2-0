@@ -14,8 +14,8 @@ public class CarrierTest
     @Test
     void CarrierTest(){
         Player player = new Player("Felix","Human","Red");
-        Carrier carrier1 = new Carrier(player);
-        Carrier carrier2 = new Carrier(player);
+        Carrier carrier1 = new Carrier(player, Coordinates.CENTER);
+        Carrier carrier2 = new Carrier(player, Coordinates.CENTER);
 
         assertEquals("Carrier", carrier1.getTypeOfShip());
         assertEquals(3, carrier1.getResourceCost());
