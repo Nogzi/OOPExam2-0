@@ -3,6 +3,8 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import java.util.Objects;
+
 public class Cruiser implements Units {
     private String typeOfShip = "Cruiser";
     private int resourceCost = 2;
@@ -49,6 +51,25 @@ public class Cruiser implements Units {
     public Player getOwner()
     {
         return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cruiser cruiser = (Cruiser) o;
+        return resourceCost == cruiser.resourceCost &&
+                combatValue == cruiser.combatValue &&
+                movementSpeed == cruiser.movementSpeed &&
+                capacity == cruiser.capacity &&
+                Objects.equals(typeOfShip, cruiser.typeOfShip) &&
+                Objects.equals(owner, cruiser.owner);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(typeOfShip, resourceCost, combatValue, movementSpeed, capacity, owner);
     }
 }
 

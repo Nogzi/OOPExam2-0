@@ -3,6 +3,8 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import java.util.Objects;
+
 public class Destroyer implements Units {
     private String typeOfShip = "Destroyer";
     private int resourceCost = 1;
@@ -49,5 +51,24 @@ public class Destroyer implements Units {
     public Player getOwner()
     {
         return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Destroyer destroyer = (Destroyer) o;
+        return resourceCost == destroyer.resourceCost &&
+                combatValue == destroyer.combatValue &&
+                movementSpeed == destroyer.movementSpeed &&
+                capacity == destroyer.capacity &&
+                Objects.equals(typeOfShip, destroyer.typeOfShip) &&
+                Objects.equals(owner, destroyer.owner);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(typeOfShip, resourceCost, combatValue, movementSpeed, capacity, owner);
     }
 }

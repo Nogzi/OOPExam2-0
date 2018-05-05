@@ -3,6 +3,8 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import java.util.Objects;
+
 public class Carrier implements Units {
     private String typeOfShip = "Carrier";
     private int resourceCost = 3;
@@ -48,5 +50,24 @@ public class Carrier implements Units {
     public Player getOwner()
     {
         return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carrier carrier = (Carrier) o;
+        return resourceCost == carrier.resourceCost &&
+                combatValue == carrier.combatValue &&
+                movementSpeed == carrier.movementSpeed &&
+                capacity == carrier.capacity &&
+                Objects.equals(typeOfShip, carrier.typeOfShip) &&
+                Objects.equals(owner, carrier.owner);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(typeOfShip, resourceCost, combatValue, movementSpeed, capacity, owner);
     }
 }
