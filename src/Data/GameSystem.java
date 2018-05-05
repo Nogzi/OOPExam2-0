@@ -24,13 +24,24 @@ public class GameSystem {
      */
     public int findShips(){
         int amountOfShips = 0;
-
-        for (Units unit: unitsSet)
-        {
-            amountOfShips++;
+        if () {
+            for (Units unit : unitsSet) {
+                amountOfShips++;
+            }
+        }
+        return amountOfShips;
+    }
+    public int findPlanets(){
+        int amountOfPlanets = 0;
+        if (planetSet != null){
+            for (Planet planet: planetSet) {
+                amountOfPlanets++;
+            }
+        }else{
+            return  amountOfPlanets;
         }
 
-        return amountOfShips;
+        return amountOfPlanets;
     }
 
     @Override
