@@ -11,7 +11,7 @@ public class PlanetTest {
     @Test
     void PlanetTest(){
         Player player = new Player("Felix","Human","Red");
-        Planet planet = new Planet(player,2, "NicePlanet");
+        Planet planet = new Planet(player,2, "NicePlanet", Coordinates.CENTER);
 
         assertEquals(player, planet.getOwner());
         assertEquals(2, planet.getResourceProduction());
