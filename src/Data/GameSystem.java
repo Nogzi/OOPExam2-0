@@ -16,6 +16,9 @@ public class GameSystem {
         this.planetSet = planetSet;
         this.unitsSet = unitsSet;
     }
+    
+    
+    
     /*
      * Takes the amount of ships in the system and counts how many ships there are in total
      */
