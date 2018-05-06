@@ -14,7 +14,8 @@ public class GameSystem {
     List<Destroyer>destroyers = new LinkedList<>();
     List<Dreadnought>dreadnoughts = new LinkedList<>();
 
-    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Carrier> carriers, List<Cruiser> cruisers, List<Destroyer> destroyers, List<Dreadnought> dreadnoughts) {
+    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Carrier> carriers, List<Cruiser> cruisers, List<Destroyer> destroyers, List<Dreadnought> dreadnoughts)
+    {
         this.location = location;
         this.planetSet = planetSet;
         this.carriers = carriers;
@@ -22,22 +23,12 @@ public class GameSystem {
         this.destroyers = destroyers;
         this.dreadnoughts = dreadnoughts;
     }
-<<<<<<< Updated upstream
-    
-    
-    
-=======
-
->>>>>>> Stashed changes
     /*
      * Takes the amount of ships in the system and counts how many ships there are in total
      */
     public int findShips(){
         int amountOfShips = 0;
-<<<<<<< Updated upstream
-        if () {
-            for (Units unit : unitsSet) {
-=======
+        
         if (carriers != null) {
             for (Carrier carrier : carriers) {
                 amountOfShips++;
@@ -55,7 +46,6 @@ public class GameSystem {
         }
         if (dreadnoughts != null) {
             for (Dreadnought dreadnought : dreadnoughts) {
->>>>>>> Stashed changes
                 amountOfShips++;
             }
         }
@@ -67,8 +57,7 @@ public class GameSystem {
             for (Planet planet: planetSet) {
                 amountOfPlanets++;
             }
-        }else{
-            return  amountOfPlanets;
+        
         }
 
         return amountOfPlanets;
