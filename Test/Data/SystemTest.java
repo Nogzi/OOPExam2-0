@@ -22,9 +22,7 @@ public class SystemTest {
         GameSystem gameSystem = new GameSystem(Coordinates.CENTER, planets,null, cruisers,null,null);
 
 
-        assertEquals(1, planets.size());
-        assertEquals(1, gameSystem.cruisers.size());
+        assertEquals(1, gameSystem.findPlanets());
         assertEquals(1, gameSystem.findShips());
-        assertEquals(1, gameSystem.planetSet.size());
     }
 }
