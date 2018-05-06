@@ -22,7 +22,14 @@ public class Planet {
         this.name = name;
         this.placement =placement;
     }
-
+    
+    public Planet(String name, int resourceProduction, Coordinates placement)
+    {
+        this.name = name;
+        this.resourceProduction = resourceProduction;
+        this.placement = placement;
+    }
+    
     public String getName()
     {
         return name;

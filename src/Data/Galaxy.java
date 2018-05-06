@@ -4,7 +4,9 @@ package Data;/*
  */
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Galaxy {
     List<GameSystem> gameSystemList = new ArrayList<>();
@@ -12,17 +14,66 @@ public class Galaxy {
     private int amountOfShips = 0;
     private int amountOfPlanets = 0;
     
-    public void findSystemsInGalaxy() {
+    public Galaxy(List<GameSystem> gameSystemList)
+    {
+        this.gameSystemList = gameSystemList;
+    }
+    
+    public int findSystemsInGalaxy() {
         amountOfSystems += gameSystemList.size();
         System.out.println("There is " + amountOfSystems + " systems in the galaxy");
+        return amountOfSystems;
     }
-    public void findShipsInGalaxy(){
+    public int findShipsInGalaxy(){
         for (GameSystem gameSystem: gameSystemList) {
             amountOfShips += gameSystem.findShips();
         }
-        System.out.println("There is " + amountOfShips + " in the galaxy");
+        System.out.println("There is " + amountOfShips + " units in the galaxy");
+        return amountOfShips;
     }
-    public void findPlanetsInGalaxy(){
-
+    public int findPlanetsInGalaxy(){
+        for (GameSystem gameSystem:gameSystemList)
+        {
+            amountOfPlanets+= gameSystem.findPlanets();
+        }
+        System.out.println("There is " + amountOfPlanets + " planets in the galaxy");
+        return amountOfPlanets;
+    }
+    public void makeDefaultGalaxy(){
+        Random random = new Random();
+        Player player1 = new Player("Felix", "Human", "Blue");
+        Player player2 = new Player("Simon", "Treehugger", "Red");
+        
+        Planet planet1 = new Planet(player1,random.nextInt(6), "Mecatol Rex", Coordinates.CENTER);
+        Planet planet2 = new Planet(player2, random.nextInt(6), "Vega Major", Coordinates.NORTH);
+        Planet planet3 = new Planet(player2, random.nextInt(6), "Vega Minor", Coordinates.NORTH);
+        Planet planet4 = new Planet("Industrex",random.nextInt(6), Coordinates.SOUTHEAST);
+        Planet planet5 = new Planet("Rigel 1", random.nextInt(6), Coordinates.SOUTH);
+        Planet planet6 = new Planet("Rigel 2", random.nextInt(6), Coordinates.SOUTH);
+        Planet planet7 = new Planet("Mirage", random.nextInt(6), Coordinates.NORTHWEST);
+        
+        Dreadnought dreadnought1 = new Dreadnought(player1);
+        Dreadnought dreadnought2 = new Dreadnought(player1);
+        Destroyer destroyer1 = new Destroyer(player1);
+        Cruiser cruiser1 = new Cruiser(player2);
+        Cruiser cruiser2 = new Cruiser(player2);
+        Carrier carrier1 = new Carrier(player2);
+        
+        List<Dreadnought> dreadnoughts = new LinkedList<>();
+        List<Destroyer> destroyers = new LinkedList<>();
+        List<Cruiser> cruisers = new LinkedList<>();
+        List<Carrier> carriers = new LinkedList<>();
+        
+        dreadnoughts.add(dreadnought1);
+        dreadnoughts.add(dreadnought2);
+        destroyers.add(destroyer1);
+        cruisers.add(cruiser1);
+        cruisers.add(cruiser2);
+        carriers.add(carrier1);
+        
+        GameSystemBuilder system1 = new GameSystemBuilder();
+        system1.setNewDreadnoughtList(dreadnoughts)
+                .setNewDestroyerList(destroyers)
+                .setNewLocation(Coordinates.CENTER);
     }
 }
