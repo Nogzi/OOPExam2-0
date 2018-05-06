@@ -3,10 +3,7 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Galaxy {
     List<GameSystem> gameSystemList = new ArrayList<>();
@@ -70,10 +67,26 @@ public class Galaxy {
         cruisers.add(cruiser1);
         cruisers.add(cruiser2);
         carriers.add(carrier1);
+
+        Set<Planet>planets1 = new HashSet<>();
+        Set<Planet>planets2 = new HashSet<>();
+        Set<Planet>planets3 = new HashSet<>();
+        Set<Planet>planets4 = new HashSet<>();
+        Set<Planet>planets5 = new HashSet<>();
+
+        planets1.add(planet1);
+        planets2.add(planet2);
+        planets2.add(planet3);
+        planets3.add(planet4);
+        planets4.add(planet5);
+        planets4.add(planet6);
+        planets5.add(planet7);
         
         GameSystemBuilder system1 = new GameSystemBuilder();
         system1.setNewDreadnoughtList(dreadnoughts)
                 .setNewDestroyerList(destroyers)
-                .setNewLocation(Coordinates.CENTER);
+                .setNewLocation(Coordinates.CENTER)
+                .setNewPlanetSet(planets1);
+        
     }
 }
