@@ -4,6 +4,7 @@ package Data;/*
  */
 
 import javax.swing.plaf.basic.BasicTreeUI;
+import java.util.Objects;
 
 public class Planet {
     private String name;
@@ -30,6 +31,12 @@ public class Planet {
         this.placement = placement;
     }
     
+    public Planet(String name, Coordinates placement)
+    {
+        this.name = name;
+        this.placement = placement;
+    }
+    
     public String getName()
     {
         return name;
@@ -43,5 +50,22 @@ public class Planet {
     public Player getOwner()
     {
         return owner;
+    }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planet planet = (Planet) o;
+        return Objects.equals(name, planet.name) &&
+                placement == planet.placement;
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        
+        return Objects.hash(name, placement);
     }
 }

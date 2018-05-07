@@ -101,6 +101,8 @@ public class DefaultGalaxyTest
 		
 		Galaxy galaxy = new Galaxy(gameSystems);
 		
+		galaxy.makeDefaultGalaxy();
+		
 		assertEquals(7, galaxy.findPlanetsInGalaxy());
 		assertEquals(7, galaxy.findSystemsInGalaxy());
 		assertEquals(6, galaxy.findShipsInGalaxy());

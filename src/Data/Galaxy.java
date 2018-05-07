@@ -3,6 +3,11 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import exception.NoMatchingSystemException;
+import exception.PlanetIsInMoreThenOneSystemException;
+import exception.TooManyPlanets;
+import exception.WrongCenterPlanetException;
+
 import java.util.*;
 
 public class Galaxy {
@@ -36,10 +41,23 @@ public class Galaxy {
         System.out.println("There is " + amountOfPlanets + " planets in the galaxy");
         return amountOfPlanets;
     }
-    public void makeDefaultGalaxy(){
+    
+    public GameSystem getSystemAt(Coordinates coordinates) throws NoMatchingSystemException
+    {
+        for (GameSystem gameSystem: gameSystemList)
+        {
+            if (gameSystem.location.equals(coordinates))
+                return gameSystem;
+        }
+        
+        throw new NoMatchingSystemException();
+    }
+    
+    public void makeDefaultGalaxy()
+    {
         Random random = new Random();
-        Player player1 = new Player("Felix", "Human", "Blue");
-        Player player2 = new Player("Simon", "Treehugger", "Red");
+        Player player1 = new Player("Crassus", "The Emirates of Hacan", "Blue");
+        Player player2 = new Player("Pompey", "The Federation of Sol", "Red");
         
         Planet planet1 = new Planet(player1,random.nextInt(6), "Mecatol Rex", Coordinates.CENTER);
         Planet planet2 = new Planet(player2, random.nextInt(6), "Vega Major", Coordinates.NORTH);
@@ -126,5 +144,43 @@ public class Galaxy {
         gameSystems.add(gameSystem7);
         
         Galaxy galaxy = new Galaxy(gameSystems);
+    }
+    
+    public boolean CheckLegality() throws WrongCenterPlanetException, PlanetIsInMoreThenOneSystemException, NoMatchingSystemException, TooManyPlanets
+    {
+        GameSystem centerSystem;
+        
+        centerSystem = getSystemAt(Coordinates.CENTER);
+        if(centerSystem.planetSet.size() == 1){
+            if(centerSystem.planetSet.contains(new Planet("Mecatol Rex", Coordinates.CENTER)))
+                
+                System.out.println("Center system is fine");
+            else
+                throw new WrongCenterPlanetException();
+        }else
+            return false;
+            
+        for (GameSystem gameSystems1: gameSystemList)
+        {
+            for (Planet planets: gameSystems1.planetSet)
+            {
+                for (GameSystem gameSystems2: gameSystemList)
+                {
+                    if (!gameSystems1.equals(gameSystems2))
+                        if (gameSystems1.planetSet.contains(planets) && gameSystems2.planetSet.contains(planets)){
+                        throw new PlanetIsInMoreThenOneSystemException();
+                        }else
+                            System.out.println("There are no planet that is in more then 1 system at the time");
+                }
+            }
+        }
+    
+        for (GameSystem gameSystem: gameSystemList)
+        {
+            if (gameSystem.planetSet.size() >3)
+                throw new TooManyPlanets();
+        }
+        
+        return true;
     }
 }
