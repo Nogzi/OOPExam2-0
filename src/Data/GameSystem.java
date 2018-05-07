@@ -14,12 +14,12 @@ public class GameSystem {
 
     Coordinates location;
     Set<Planet> planetSet = new HashSet<>();
-    List<Ships> ships = new LinkedList<>();
+    List<Ships> shipsList = new LinkedList<>();
 
     public GameSystem(Coordinates location, Set<Planet> planetSet, List<Ships> ships) {
         this.location = location;
         this.planetSet = planetSet;
-        this.ships = ships;
+        this.shipsList = ships;
     }
 
 
@@ -29,7 +29,7 @@ public class GameSystem {
     public int findShips(){
         int amountOfShips = 0;
 
-        for (Ships ship: ships)
+        for (Ships ship: shipsList)
         {
             amountOfShips++;
         }

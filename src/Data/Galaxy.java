@@ -12,10 +12,12 @@ import exception.PlanetIsInMoreThenOneSystemException;
 import exception.TooManyPlanets;
 import exception.WrongCenterPlanetException;
 
+import javax.swing.text.StyledEditorKit;
 import java.util.*;
 
 public class Galaxy {
-    List<GameSystem> gameSystemList = new ArrayList<>();
+    List<GameSystem> gameSystemList = new LinkedList<>();
+    List<Player>players = new LinkedList<>();
     private int amountOfSystems = 0;
     private int amountOfShips = 0;
     private int amountOfPlanets = 0;
@@ -167,10 +169,9 @@ public class Galaxy {
                 for (GameSystem gameSystems2: gameSystemList)
                 {
                     if (!gameSystems1.equals(gameSystems2))
-                        if (gameSystems1.planetSet.contains(planets) && gameSystems2.planetSet.contains(planets)){
-                        throw new PlanetIsInMoreThenOneSystemException();
-                        }else
-                            System.out.println("There are no planet that is in more then 1 system at the time");
+                        if (gameSystems1.planetSet.contains(planets) && gameSystems2.planetSet.contains(planets))
+                            throw new PlanetIsInMoreThenOneSystemException();
+
                 }
             }
         }
@@ -184,5 +185,19 @@ public class Galaxy {
         return true;
     }
 
-    
+    public void findAllPlayersShips(){
+        for (Player player: players)
+        {
+            for (GameSystem gameSystem: gameSystemList)
+            {
+                for (Ships ship: gameSystem.shipsList) {
+                    System.out.println(ship);
+                }
+            }
+        }
+    }
+
+    public void PrintGalaxy(){
+
+    }
 }

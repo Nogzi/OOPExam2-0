@@ -4,6 +4,10 @@ import Data.ShipTypes.Carrier;
 import Data.ShipTypes.Cruiser;
 import Data.ShipTypes.Destroyer;
 import Data.ShipTypes.Dreadnought;
+import exception.NoMatchingSystemException;
+import exception.PlanetIsInMoreThenOneSystemException;
+import exception.TooManyPlanets;
+import exception.WrongCenterPlanetException;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -14,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DefaultGalaxyTest
 {
 	@Test
-	void DefaultGalaxyTest(){
+	void DefaultGalaxyTest() throws NoMatchingSystemException, PlanetIsInMoreThenOneSystemException, WrongCenterPlanetException, TooManyPlanets {
 		Random random = new Random();
 		Player player1 = new Player("Crassus", "The Emirates of Hacan", "Blue");
 		Player player2 = new Player("Pompey", "The Federation of Sol", "Red");
@@ -100,9 +104,15 @@ public class DefaultGalaxyTest
 		gameSystems.add(gameSystem7);
 
 		Galaxy galaxy = new Galaxy(gameSystems);
+
+		galaxy.makeDefaultGalaxy();
 		
 		assertEquals(7, galaxy.findPlanetsInGalaxy());
 		assertEquals(7, galaxy.findSystemsInGalaxy());
 		assertEquals(6, galaxy.findShipsInGalaxy());
+
+		assertTrue(galaxy.CheckLegality());
+
+		galaxy.findAllPlayersShips();
 	}
 }
