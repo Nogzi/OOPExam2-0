@@ -26,6 +26,10 @@ public class Planet {
     
     public Planet(String name, int resourceProduction, Coordinates placement)
     {
+        if (resourceProduction < 0 || resourceProduction > 6)
+            throw new IllegalArgumentException("you done goofed in the resource production numbers");
+        if (name.equals(null))
+            throw new NullPointerException("A planet does not have a name");
         this.name = name;
         this.resourceProduction = resourceProduction;
         this.placement = placement;
@@ -33,6 +37,8 @@ public class Planet {
     
     public Planet(String name, Coordinates placement)
     {
+        if (name.equals(null))
+            throw new NullPointerException("A planet does not have a name");
         this.name = name;
         this.placement = placement;
     }

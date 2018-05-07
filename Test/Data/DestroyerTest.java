@@ -3,6 +3,7 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import Data.ShipTypes.Destroyer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,13 +13,14 @@ public class DestroyerTest
     @Test
     void DestroyerTest(){
         Player player = new Player("Felix", "Human", "Red");
-        Destroyer destroyer = new Destroyer(player);
+        Destroyer destroyer = new Destroyer(player, Coordinates.NORTH);
 
-        assertEquals("Destroyer",destroyer.getTypeOfShip());
-        assertEquals(1, destroyer.getResourceCost());
-        assertEquals(9, destroyer.getCombatValue());
-        assertEquals(2, destroyer.getMovementSpeed());
-        assertEquals(0, destroyer.getCapacity());
-        assertEquals(player, destroyer.getOwner());
+        //assertEquals("Destroyer", destroyer.typeOfShip);
+        assertEquals(1, destroyer.resourceCost);
+        assertEquals(9, destroyer.combatValue);
+        assertEquals(2, destroyer.movementSpeed);
+        assertEquals(0, destroyer.capacity);
+        assertEquals(player, destroyer.owner);
+        assertEquals(Coordinates.NORTH, destroyer.location);
     }
 }

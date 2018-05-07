@@ -3,52 +3,37 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import Data.ShipTypes.Carrier;
+import Data.ShipTypes.Cruiser;
+import Data.ShipTypes.Destroyer;
+import Data.ShipTypes.Dreadnought;
+
 import java.util.*;
 
 public class GameSystem {
 
     Coordinates location;
     Set<Planet> planetSet = new HashSet<>();
-    List<Carrier>carriers = new LinkedList<>();
-    List<Cruiser>cruisers = new LinkedList<>();
-    List<Destroyer>destroyers = new LinkedList<>();
-    List<Dreadnought>dreadnoughts = new LinkedList<>();
+    List<Ships> ships = new LinkedList<>();
 
-    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Carrier> carriers, List<Cruiser> cruisers, List<Destroyer> destroyers, List<Dreadnought> dreadnoughts)
-    {
+    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Ships> ships) {
         this.location = location;
         this.planetSet = planetSet;
-        this.carriers = carriers;
-        this.cruisers = cruisers;
-        this.destroyers = destroyers;
-        this.dreadnoughts = dreadnoughts;
+        this.ships = ships;
     }
+
+
     /*
      * Takes the amount of ships in the system and counts how many ships there are in total
      */
     public int findShips(){
         int amountOfShips = 0;
-        
-        if (carriers != null) {
-            for (Carrier carrier : carriers) {
-                amountOfShips++;
-            }
+
+        for (Ships ship: ships)
+        {
+            amountOfShips++;
         }
-        if (cruisers != null) {
-            for (Cruiser cruiser : cruisers) {
-                amountOfShips++;
-            }
-        }
-        if (destroyers != null) {
-            for (Destroyer destroyer : destroyers) {
-                amountOfShips++;
-            }
-        }
-        if (dreadnoughts != null) {
-            for (Dreadnought dreadnought : dreadnoughts) {
-                amountOfShips++;
-            }
-        }
+
         return amountOfShips;
     }
     public int findPlanets(){
@@ -69,15 +54,12 @@ public class GameSystem {
         if (o == null || getClass() != o.getClass()) return false;
         GameSystem that = (GameSystem) o;
         return location == that.location &&
-                Objects.equals(carriers, that.carriers) &&
-                Objects.equals(cruisers, that.cruisers) &&
-                Objects.equals(destroyers, that.destroyers) &&
-                Objects.equals(dreadnoughts, that.dreadnoughts);
+                Objects.equals(planetSet, that.planetSet);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(location);
+        return Objects.hash(location, planetSet);
     }
 }

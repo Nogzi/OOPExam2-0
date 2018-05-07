@@ -3,6 +3,10 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import Data.ShipTypes.Carrier;
+import Data.ShipTypes.Cruiser;
+import Data.ShipTypes.Destroyer;
+import Data.ShipTypes.Dreadnought;
 import exception.NoMatchingSystemException;
 import exception.PlanetIsInMoreThenOneSystemException;
 import exception.TooManyPlanets;
@@ -67,24 +71,22 @@ public class Galaxy {
         Planet planet6 = new Planet("Rigel 2", random.nextInt(6), Coordinates.SOUTH);
         Planet planet7 = new Planet("Mirage", random.nextInt(6), Coordinates.NORTHWEST);
         
-        Dreadnought dreadnought1 = new Dreadnought(player1);
-        Dreadnought dreadnought2 = new Dreadnought(player1);
-        Destroyer destroyer1 = new Destroyer(player1);
-        Cruiser cruiser1 = new Cruiser(player2);
-        Cruiser cruiser2 = new Cruiser(player2);
-        Carrier carrier1 = new Carrier(player2);
+        Dreadnought dreadnought1 = new Dreadnought(player1,Coordinates.CENTER);
+        Dreadnought dreadnought2 = new Dreadnought(player1,Coordinates.CENTER);
+        Destroyer destroyer1 = new Destroyer(player1, Coordinates.CENTER);
+        Cruiser cruiser1 = new Cruiser(player2, Coordinates.NORTH);
+        Cruiser cruiser2 = new Cruiser(player2, Coordinates.NORTH);
+        Carrier carrier1 = new Carrier(player2, Coordinates.NORTH);
         
-        List<Dreadnought> dreadnoughts = new LinkedList<>();
-        List<Destroyer> destroyers = new LinkedList<>();
-        List<Cruiser> cruisers = new LinkedList<>();
-        List<Carrier> carriers = new LinkedList<>();
-        
-        dreadnoughts.add(dreadnought1);
-        dreadnoughts.add(dreadnought2);
-        destroyers.add(destroyer1);
-        cruisers.add(cruiser1);
-        cruisers.add(cruiser2);
-        carriers.add(carrier1);
+        List<Ships>shipsList1 = new LinkedList<>();
+        List<Ships>shipsList2 = new LinkedList<>();
+
+        shipsList1.add(dreadnought1);
+        shipsList1.add(dreadnought2);
+        shipsList1.add(destroyer1);
+        shipsList2.add(cruiser1);
+        shipsList2.add(cruiser2);
+        shipsList2.add(carrier1);
 
         Set<Planet>planets1 = new HashSet<>();
         Set<Planet>planets2 = new HashSet<>();
@@ -108,13 +110,11 @@ public class Galaxy {
         GameSystemBuilder system6 = new GameSystemBuilder();
         GameSystemBuilder system7 = new GameSystemBuilder();
         
-        system1.setNewDreadnoughtList(dreadnoughts)
-                .setNewDestroyerList(destroyers)
-                .setNewLocation(Coordinates.CENTER)
-                .setNewPlanetSet(planets1);
+        system1.setNewLocation(Coordinates.CENTER)
+                .setNewPlanetSet(planets1)
+                .setNewShipsSet(shipsList1);
         system2.setNewLocation(Coordinates.NORTH)
-                .setNewCarrierList(carriers)
-                .setNewCruiserList(cruisers)
+                .setNewShipsSet(shipsList2)
                 .setNewPlanetSet(planets2);
         system3.setNewLocation(Coordinates.NORTHWEST)
                 .setNewPlanetSet(planets5);
@@ -183,4 +183,6 @@ public class Galaxy {
         
         return true;
     }
+
+    
 }

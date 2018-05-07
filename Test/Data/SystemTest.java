@@ -3,6 +3,7 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import Data.ShipTypes.Cruiser;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -14,12 +15,12 @@ public class SystemTest {
     void SystemTest(){
         Player player1 = new Player("Felix","Human","Red");
         Planet planet1 = new Planet(player1,2,"NicePlanet",Coordinates.CENTER);
-        Cruiser cruiser1 = new Cruiser(player1);
-        LinkedList<Cruiser>cruisers = new LinkedList<>();
+        Cruiser cruiser1 = new Cruiser(player1, Coordinates.CENTER);
+        List<Ships>shipsList = new LinkedList<>();
         HashSet<Planet>planets = new HashSet<>();
-        cruisers.add(cruiser1);
+        shipsList.add(cruiser1);
         planets.add(planet1);
-        GameSystem gameSystem = new GameSystem(Coordinates.CENTER, planets,null, cruisers,null,null);
+        GameSystem gameSystem = new GameSystem(Coordinates.CENTER, planets,shipsList);
 
 
         assertEquals(1, gameSystem.findPlanets());
