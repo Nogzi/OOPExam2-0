@@ -83,10 +83,48 @@ public class Galaxy {
         planets5.add(planet7);
         
         GameSystemBuilder system1 = new GameSystemBuilder();
+        GameSystemBuilder system2 = new GameSystemBuilder();
+        GameSystemBuilder system3 = new GameSystemBuilder();
+        GameSystemBuilder system4 = new GameSystemBuilder();
+        GameSystemBuilder system5 = new GameSystemBuilder();
+        GameSystemBuilder system6 = new GameSystemBuilder();
+        GameSystemBuilder system7 = new GameSystemBuilder();
+        
         system1.setNewDreadnoughtList(dreadnoughts)
                 .setNewDestroyerList(destroyers)
                 .setNewLocation(Coordinates.CENTER)
                 .setNewPlanetSet(planets1);
+        system2.setNewLocation(Coordinates.NORTH)
+                .setNewCarrierList(carriers)
+                .setNewCruiserList(cruisers)
+                .setNewPlanetSet(planets2);
+        system3.setNewLocation(Coordinates.NORTHWEST)
+                .setNewPlanetSet(planets5);
+        system4.setNewLocation(Coordinates.NORTHEAST);
+        system5.setNewLocation(Coordinates.SOUTH)
+                .setNewPlanetSet(planets4);
+        system6.setNewLocation(Coordinates.SOUTHWEST);
+        system7.setNewLocation(Coordinates.SOUTHEAST)
+                .setNewPlanetSet(planets3);
+    
+        GameSystem gameSystem1 = system1.createGameSystem();
+        GameSystem gameSystem2 = system2.createGameSystem();
+        GameSystem gameSystem3 = system3.createGameSystem();
+        GameSystem gameSystem4 = system4.createGameSystem();
+        GameSystem gameSystem5 = system5.createGameSystem();
+        GameSystem gameSystem6 = system6.createGameSystem();
+        GameSystem gameSystem7 = system7.createGameSystem();
         
+        List<GameSystem>gameSystems = new LinkedList<>();
+        
+        gameSystems.add(gameSystem1);
+        gameSystems.add(gameSystem2);
+        gameSystems.add(gameSystem3);
+        gameSystems.add(gameSystem4);
+        gameSystems.add(gameSystem5);
+        gameSystems.add(gameSystem6);
+        gameSystems.add(gameSystem7);
+        
+        Galaxy galaxy = new Galaxy(gameSystems);
     }
 }
