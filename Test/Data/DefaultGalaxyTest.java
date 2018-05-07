@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DefaultGalaxyTest
 {
@@ -100,6 +101,8 @@ public class DefaultGalaxyTest
 		
 		Galaxy galaxy = new Galaxy(gameSystems);
 		
-		assertEquals();
+		assertEquals(7, galaxy.findPlanetsInGalaxy());
+		assertEquals(7, galaxy.findSystemsInGalaxy());
+		assertEquals(6, galaxy.findShipsInGalaxy());
 	}
 }
