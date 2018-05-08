@@ -12,17 +12,57 @@ import java.util.*;
 
 public class GameSystem {
 
-    Coordinates location;
-    Set<Planet> planetSet = new HashSet<>();
-    List<Ships> shipsList = new LinkedList<>();
+    private Coordinates location;
+    private Set<Planet> planetSet = new HashSet<>();
+    private List<Ships> shipsList = new LinkedList<>();
+    private Player systemOwner = new Player("NoPlayer","NoPlayer", "NoPlayer");
 
     public GameSystem(Coordinates location, Set<Planet> planetSet, List<Ships> ships) {
         this.location = location;
         this.planetSet = planetSet;
         this.shipsList = ships;
     }
-
-
+    
+    public GameSystem(Coordinates location, Set<Planet> planetSet, List<Ships> shipsList, Player systemOwner)
+    {
+        this.location = location;
+        this.planetSet = planetSet;
+        this.shipsList = shipsList;
+        this.systemOwner = systemOwner;
+    }
+    
+    public GameSystem(Coordinates location)
+    {
+        this.location = location;
+    }
+    
+    public GameSystem(Coordinates location, Set<Planet> planetSet)
+    {
+        this.location = location;
+        this.planetSet = planetSet;
+    }
+    
+    public Coordinates getLocation()
+    {
+        return location;
+    }
+    
+    public Set<Planet> getPlanetSet()
+    {
+        return planetSet;
+    }
+    
+    public List<Ships> getShipsList()
+    {
+        return shipsList;
+    }
+    
+    public Player getSystemOwner()
+    {
+        return systemOwner;
+    }
+    
+    
     /*
      * Takes the amount of ships in the system and counts how many ships there are in total
      */
@@ -46,6 +86,15 @@ public class GameSystem {
         }
 
         return amountOfPlanets;
+    }
+    
+    public void enterSystem(Ships ship){
+        shipsList.add(ship);
+        
+    }
+    
+    public void exitSystem(Ships ship){
+        shipsList.remove(ship);
     }
 
     @Override

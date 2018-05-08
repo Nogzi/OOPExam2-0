@@ -9,8 +9,9 @@ import java.util.Objects;
 public class Planet {
     private String name;
     private int resourceProduction;
-    private Player owner;
+    private Player owner = new Player("NoOwner", "NoOwner", "NoOwner");
     private Coordinates placement;
+    
 
     public Planet(Player owner, int resourceProduction, String name, Coordinates placement)
     {

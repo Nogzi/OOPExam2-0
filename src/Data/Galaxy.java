@@ -3,6 +3,9 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
+import Data.CustomInfo.Colors;
+import Data.CustomInfo.PlanetNames;
+import Data.CustomInfo.Races;
 import Data.ShipTypes.Carrier;
 import Data.ShipTypes.Cruiser;
 import Data.ShipTypes.Destroyer;
@@ -13,6 +16,9 @@ import exception.TooManyPlanets;
 import exception.WrongCenterPlanetException;
 
 import javax.swing.text.StyledEditorKit;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Galaxy {
@@ -48,22 +54,12 @@ public class Galaxy {
         return amountOfPlanets;
     }
     
-    public GameSystem getSystemAt(Coordinates coordinates) throws NoMatchingSystemException
-    {
-        for (GameSystem gameSystem: gameSystemList)
-        {
-            if (gameSystem.location.equals(coordinates))
-                return gameSystem;
-        }
-        
-        throw new NoMatchingSystemException();
-    }
     
     public void makeDefaultGalaxy()
     {
         Random random = new Random();
-        Player player1 = new Player("Crassus", "The Emirates of Hacan", "Blue");
-        Player player2 = new Player("Pompey", "The Federation of Sol", "Red");
+        Player player1 = new Player("Crassus", Races.races.get(6), Colors.Colors.get(1));
+        Player player2 = new Player("Pompey", Races.races.get(11), Colors.Colors.get(2));
         
         players.add(player1);
         players.add(player2);
@@ -117,10 +113,12 @@ public class Galaxy {
         
         system1.setNewLocation(Coordinates.CENTER)
                 .setNewPlanetSet(planets1)
-                .setNewShipsSet(shipsList1);
+                .setNewShipsSet(shipsList1)
+                .setNewOwner(player1);
         system2.setNewLocation(Coordinates.NORTH)
                 .setNewShipsSet(shipsList2)
-                .setNewPlanetSet(planets2);
+                .setNewPlanetSet(planets2)
+                .setNewOwner(player2);
         system3.setNewLocation(Coordinates.NORTHWEST)
                 .setNewPlanetSet(planets5);
         system4.setNewLocation(Coordinates.NORTHEAST);
@@ -151,13 +149,24 @@ public class Galaxy {
         Galaxy galaxy = new Galaxy(gameSystems);
     }
     
+    public GameSystem getSystemAt(Coordinates coordinates) throws NoMatchingSystemException
+    {
+        for (GameSystem gameSystem: gameSystemList)
+        {
+            if (gameSystem.getLocation().equals(coordinates))
+                return gameSystem;
+        }
+        
+        throw new NoMatchingSystemException();
+    }
+    
     public boolean CheckLegality() throws WrongCenterPlanetException, PlanetIsInMoreThenOneSystemException, NoMatchingSystemException, TooManyPlanets
     {
         GameSystem centerSystem;
         
         centerSystem = getSystemAt(Coordinates.CENTER);
-        if(centerSystem.planetSet.size() == 1){
-            if(centerSystem.planetSet.contains(new Planet("Mecatol Rex", Coordinates.CENTER)))
+        if(centerSystem.getPlanetSet().size() == 1){
+            if(centerSystem.getPlanetSet().contains(new Planet("Mecatol Rex", Coordinates.CENTER)))
                 
                 System.out.println("Center system is fine");
             else
@@ -165,14 +174,11 @@ public class Galaxy {
         }else
             return false;
             
-        for (GameSystem gameSystems1: gameSystemList)
-        {
-            for (Planet planets: gameSystems1.planetSet)
-            {
-                for (GameSystem gameSystems2: gameSystemList)
-                {
+        for (GameSystem gameSystems1: gameSystemList) {
+            for (Planet planets: gameSystems1.getPlanetSet()) {
+                for (GameSystem gameSystems2: gameSystemList) {
                     if (!gameSystems1.equals(gameSystems2))
-                        if (gameSystems1.planetSet.contains(planets) && gameSystems2.planetSet.contains(planets))
+                        if (gameSystems1.getPlanetSet().contains(planets) && gameSystems2.getPlanetSet().contains(planets))
                             throw new PlanetIsInMoreThenOneSystemException();
 
                 }
@@ -181,7 +187,7 @@ public class Galaxy {
     
         for (GameSystem gameSystem: gameSystemList)
         {
-            if (gameSystem.planetSet.size() >3)
+            if (gameSystem.getPlanetSet().size() >3)
                 throw new TooManyPlanets();
         }
         
@@ -193,7 +199,7 @@ public class Galaxy {
         
         for (GameSystem gameSystem: gameSystemList)
         {
-            for (Ships ship: gameSystem.shipsList) {
+            for (Ships ship: gameSystem.getShipsList()) {
                 if (ship.getOwner().equals(player))
                 {
                     sortedShips.add(ship);
@@ -201,10 +207,109 @@ public class Galaxy {
             }
         }
         sortedShips.sort(new ShipsComparetor());
-        System.out.println(sortedShips);
+        for (Ships ship : sortedShips)
+            System.out.println(ship.getTypeOfShip());
     }
 
-    public void PrintGalaxy(){
-
+    public void PrintGalaxy()
+    {
+        
+        
+        try
+        {
+            
+            StringBuilder writer = new StringBuilder();
+            for (Player player : players)
+            {
+                writer.append(player.getColor() + " " + player.getName() + " " + player.getRace());
+                for (GameSystem gameSystem : gameSystemList)
+                {
+                    for (Planet planet : gameSystem.getPlanetSet())
+                    {
+                        if (planet.getOwner().equals(player))
+                            writer.append("\t" + planet.getName());
+                    }
+                }
+            }
+            Files.write(Paths.get("/out/Output/OPG11.txt"), writer.toString().getBytes());
+        } catch (Exception e)
+        
+        {
+            
+            System.out.println("There is something wrong with the printing!");
+            
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void makeRandomGalaxy(){
+        Random random = new Random();
+        int j, k, l, m;
+        
+        Planet centerPlanet = new Planet("Mecatol Rex" ,Coordinates.CENTER);
+        
+        Set<Planet> centerPlanets = new HashSet<>();
+        centerPlanets.add(centerPlanet);
+        
+        List<Player>players = new LinkedList<>();
+        
+        for (int a = 0; a<2;a++)
+        {
+            k = random.nextInt(16);
+            j = random.nextInt(6);
+            Player player = new Player("Player " + a,Races.races.get(k),Colors.Colors.get(j));
+            players.add(player);
+            Races.races.remove(k);
+            Colors.Colors.remove(j);
+        }
+        
+        GameSystem gameSystem1 = new GameSystem(Coordinates.CENTER, centerPlanets);
+        GameSystem gameSystem2 = new GameSystem(Coordinates.NORTH);
+        GameSystem gameSystem3 = new GameSystem(Coordinates.NORTHWEST);
+        GameSystem gameSystem4 = new GameSystem(Coordinates.NORTHEAST);
+        GameSystem gameSystem5 = new GameSystem(Coordinates.SOUTHWEST);
+        GameSystem gameSystem6 = new GameSystem(Coordinates.SOUTHEAST);
+        GameSystem gameSystem7 = new GameSystem(Coordinates.SOUTH);
+        
+        List<GameSystem>gameSystems = new LinkedList<>();
+    
+        gameSystems.add(gameSystem1);
+        gameSystems.add(gameSystem2);
+        gameSystems.add(gameSystem3);
+        gameSystems.add(gameSystem4);
+        gameSystems.add(gameSystem5);
+        gameSystems.add(gameSystem6);
+        gameSystems.add(gameSystem7);
+        
+        Galaxy galaxy = new Galaxy(gameSystems);
+    
+        for (GameSystem gameSystem:gameSystems)
+        {
+            if (!gameSystem.getPlanetSet().contains(centerPlanet))
+            {
+                for (int i = 0; i<random.nextInt(3); i++){
+                    j = random.nextInt(30);
+                    Planet planet = new Planet(PlanetNames.planetNames.get(j), random.nextInt(6), gameSystem.getLocation());
+                    gameSystem.getPlanetSet().add(planet);
+                    PlanetNames.planetNames.remove(j);
+                }
+            }
+            l = random.nextInt(4);
+            m = random.nextInt(players.size());
+            if (l == 0){
+                gameSystem.getShipsList().add(new Dreadnought(players.get(m),gameSystem.getLocation()));
+            }
+            if (l == 1){
+                gameSystem.getShipsList().add(new Dreadnought(players.get(m),gameSystem.getLocation()));
+            }
+            if (l == 2){
+                gameSystem.getShipsList().add(new Dreadnought(players.get(m),gameSystem.getLocation()));
+            }
+            if (l == 3){
+                gameSystem.getShipsList().add(new Dreadnought(players.get(m),gameSystem.getLocation()));
+            }
+        }
     }
 }
+

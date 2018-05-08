@@ -123,5 +123,7 @@ public class DefaultGalaxyTest
 			
 		}
 		
+		galaxy.PrintGalaxy();
+		
 	}
 }

@@ -14,6 +14,7 @@ public class GameSystemBuilder {
     private Coordinates newLocation;
     private Set<Planet> newPlanetSet = new HashSet<>();
     private List<Ships> newShipsSet = new LinkedList<>();
+    private Player newOwner;
 
     public GameSystemBuilder() {
     }
@@ -32,8 +33,13 @@ public class GameSystemBuilder {
         this.newShipsSet = shipsSet;
         return this;
     }
+    
+    public GameSystemBuilder setNewOwner(Player player){
+        this.newOwner = player;
+        return this;
+    }
 
     public GameSystem createGameSystem(){
-        return new GameSystem(newLocation,newPlanetSet,newShipsSet);
+        return new GameSystem(newLocation,newPlanetSet,newShipsSet,newOwner);
     }
 }
