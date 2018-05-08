@@ -22,6 +22,10 @@ public class DefaultGalaxyTest
 		Random random = new Random();
 		Player player1 = new Player("Crassus", "The Emirates of Hacan", "Blue");
 		Player player2 = new Player("Pompey", "The Federation of Sol", "Red");
+		
+		List<Player>players = new LinkedList<>();
+		players.add(player1);
+		players.add(player2);
 
 		Planet planet1 = new Planet(player1,random.nextInt(6), "Mecatol Rex", Coordinates.CENTER);
 		Planet planet2 = new Planet(player2, random.nextInt(6), "Vega Major", Coordinates.NORTH);
@@ -112,7 +116,12 @@ public class DefaultGalaxyTest
 		assertEquals(6, galaxy.findShipsInGalaxy());
 
 		assertTrue(galaxy.CheckLegality());
-
-		galaxy.findAllPlayersShips();
+		
+		for (Player player: players)
+		{
+			galaxy.findAllPlayersShips(player);
+			
+		}
+		
 	}
 }

@@ -65,6 +65,9 @@ public class Galaxy {
         Player player1 = new Player("Crassus", "The Emirates of Hacan", "Blue");
         Player player2 = new Player("Pompey", "The Federation of Sol", "Red");
         
+        players.add(player1);
+        players.add(player2);
+        
         Planet planet1 = new Planet(player1,random.nextInt(6), "Mecatol Rex", Coordinates.CENTER);
         Planet planet2 = new Planet(player2, random.nextInt(6), "Vega Major", Coordinates.NORTH);
         Planet planet3 = new Planet(player2, random.nextInt(6), "Vega Minor", Coordinates.NORTH);
@@ -185,16 +188,20 @@ public class Galaxy {
         return true;
     }
 
-    public void findAllPlayersShips(){
-        for (Player player: players)
+    public void findAllPlayersShips(Player player){
+        List<Ships> sortedShips = new LinkedList<>();
+        
+        for (GameSystem gameSystem: gameSystemList)
         {
-            for (GameSystem gameSystem: gameSystemList)
-            {
-                for (Ships ship: gameSystem.shipsList) {
-                    System.out.println(ship);
+            for (Ships ship: gameSystem.shipsList) {
+                if (ship.getOwner().equals(player))
+                {
+                    sortedShips.add(ship);
                 }
             }
         }
+        sortedShips.sort(new ShipsComparetor());
+        System.out.println(sortedShips);
     }
 
     public void PrintGalaxy(){

@@ -3,7 +3,7 @@ package Data;/*
  * fcpe17@student.aau.dk
  */
 
-public abstract class Ships implements Units {
+public abstract class Ships implements Units, Comparable<Ships>{
     protected String typeOfShip;
     protected int resourceCost;
     protected int combatValue;
@@ -55,5 +55,11 @@ public abstract class Ships implements Units {
     @Override
     public Player getOwner() {
         return owner;
+    }
+    
+    @Override
+    public int compareTo(Ships o)
+    {
+        return 0;
     }
 }
