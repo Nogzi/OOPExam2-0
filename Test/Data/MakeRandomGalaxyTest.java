@@ -1,3 +1,7 @@
+/*
+ * Felix Petersen
+ * fcpe17@student.aau.dk
+ */
 package Data;
 
 import org.junit.jupiter.api.RepeatedTest;

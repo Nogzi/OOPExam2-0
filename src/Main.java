@@ -1,3 +1,7 @@
+/*
+ * Felix Petersen
+ * fcpe17@student.aau.dk
+ */
 import Data.Galaxy;
 
 import java.util.Scanner;
