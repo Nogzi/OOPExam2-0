@@ -1,7 +1,8 @@
-package Data;/*
+/*
  *Felix Cho Petersen
  * fcpe17@student.aau.dk
  */
+package Data;
 
 import Data.ShipTypes.Dreadnought;
 import org.junit.jupiter.api.Test;

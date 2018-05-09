@@ -1,3 +1,7 @@
+/*
+ *Felix Cho Petersen
+ * fcpe17@student.aau.dk
+ */
 package Data;
 
 import Data.ShipTypes.Cruiser;

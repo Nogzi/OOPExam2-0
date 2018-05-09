@@ -1,3 +1,7 @@
+/*
+ *Felix Cho Petersen
+ * fcpe17@student.aau.dk
+ */
 package Data.CustomInfo;
 
 import java.util.Arrays;
